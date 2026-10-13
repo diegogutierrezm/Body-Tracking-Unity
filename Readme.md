@@ -1,0 +1,1 @@
+En este repositorio se va a guardar el proyecto de practicas para el body tracking de Unity
