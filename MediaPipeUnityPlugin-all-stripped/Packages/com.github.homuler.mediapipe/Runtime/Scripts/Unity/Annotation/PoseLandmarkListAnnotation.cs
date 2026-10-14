@@ -210,22 +210,22 @@ namespace Mediapipe.Unity
 
     public void Draw(IReadOnlyList<NormalizedLandmark> target, bool visualizeZ = false)
     {
-      Draw(target, BodyParts.All, visualizeZ);
+      Draw(target, BodyParts.All & ~BodyParts.Face, visualizeZ);
     }
 
     public void Draw(NormalizedLandmarkList target, bool visualizeZ = false)
     {
-      Draw(target?.Landmark, BodyParts.All, visualizeZ);
+      Draw(target?.Landmark, BodyParts.All & ~BodyParts.Face, visualizeZ);
     }
 
     public void Draw(IReadOnlyList<mptcc.NormalizedLandmark> target, bool visualizeZ = false)
     {
-      Draw(target, BodyParts.All, visualizeZ);
+      Draw(target, BodyParts.All & ~BodyParts.Face, visualizeZ);
     }
 
     public void Draw(mptcc.NormalizedLandmarks target, bool visualizeZ = false)
     {
-      Draw(target.landmarks, BodyParts.All, visualizeZ);
+      Draw(target.landmarks, BodyParts.All & ~BodyParts.Face, visualizeZ);
     }
 
     private void ApplyLeftLandmarkColor(Color color)
