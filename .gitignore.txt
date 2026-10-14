@@ -1,0 +1,31 @@
+/[0-9]*/
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Build]/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Mm]emoryCaptures/
+/[Uu]ser[厂s]ettings/
+
+# Archivos de soluciones de editores de código
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.IDB
+
+# Carpetas de crash de Unity
+CrashReportUnsent/
+
+# Carpetas de OS
+.DS_Store
+Thumbs.db
