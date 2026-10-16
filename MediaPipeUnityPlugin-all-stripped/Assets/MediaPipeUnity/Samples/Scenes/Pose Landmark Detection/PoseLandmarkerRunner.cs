@@ -5,9 +5,11 @@
 // https://opensource.org/licenses/MIT.
 
 using System.Collections;
+using System.Collections.Generic;
 using Mediapipe.Tasks.Vision.PoseLandmarker;
 using UnityEngine;
 using UnityEngine.Rendering;
+using mptcc = Mediapipe.Tasks.Components.Containers;
 
 namespace Mediapipe.Unity.Sample.PoseLandmarkDetection
 {
@@ -18,6 +20,9 @@ namespace Mediapipe.Unity.Sample.PoseLandmarkDetection
     private Experimental.TextureFramePool _textureFramePool;
 
     public readonly PoseLandmarkDetectionConfig config = new PoseLandmarkDetectionConfig();
+
+    // Pose 3D (en metros) de cada detección. Se lanza desde el hilo de MediaPipe, no desde el de Unity.
+    public static event System.Action<IReadOnlyList<mptcc.Landmark>> WorldLandmarksReceived;
 
     public override void Stop()
     {
@@ -161,6 +166,9 @@ namespace Mediapipe.Unity.Sample.PoseLandmarkDetection
 
     private void OnPoseLandmarkDetectionOutput(PoseLandmarkerResult result, Image image, long timestamp)
     {
+      var world = result.poseWorldLandmarks;
+      WorldLandmarksReceived?.Invoke(world != null && world.Count > 0 ? world[0].landmarks : null);
+
       _poseLandmarkerResultAnnotationController.DrawLater(result);
       DisposeAllMasks(result);
     }
