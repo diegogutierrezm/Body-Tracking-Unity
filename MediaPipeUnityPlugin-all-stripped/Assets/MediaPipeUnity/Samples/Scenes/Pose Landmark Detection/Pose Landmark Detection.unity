@@ -463,6 +463,7 @@ GameObject:
   - component: {fileID: 1064799461}
   - component: {fileID: 1064799468}
   - component: {fileID: 1064799469}
+  - component: {fileID: 1064799470}
   m_Layer: 0
   m_Name: Solution
   m_TagString: Untagged
@@ -524,7 +525,84 @@ MonoBehaviour:
   _headColor: {r: 1, g: 1, b: 1, a: 1}
   _neckColor: {r: 1, g: 0, b: 1, a: 1}
   _headTopColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _logHeadTilt: 1
+--- !u!114 &1064799470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064799459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2e86883ef8ed64a8b4bacd931f5721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visibleGroups: 1
+  _space: 0
+  _joints:
+  - jointName: Hombro der
+    group: 1
+    jointA: 24
+    jointB: 12
+    jointC: 14
+    currentAngle: 0
+  - jointName: Codo der
+    group: 1
+    jointA: 12
+    jointB: 14
+    jointC: 16
+    currentAngle: 0
+  - jointName: Hombro izq
+    group: 2
+    jointA: 23
+    jointB: 11
+    jointC: 13
+    currentAngle: 0
+  - jointName: Codo izq
+    group: 2
+    jointA: 11
+    jointB: 13
+    jointC: 15
+    currentAngle: 0
+  - jointName: Cadera der
+    group: 4
+    jointA: 12
+    jointB: 24
+    jointC: 26
+    currentAngle: 0
+  - jointName: Rodilla der
+    group: 4
+    jointA: 24
+    jointB: 26
+    jointC: 28
+    currentAngle: 0
+  - jointName: Tobillo der
+    group: 4
+    jointA: 26
+    jointB: 28
+    jointC: 32
+    currentAngle: 0
+  - jointName: Cadera izq
+    group: 8
+    jointA: 11
+    jointB: 23
+    jointC: 25
+    currentAngle: 0
+  - jointName: Rodilla izq
+    group: 8
+    jointA: 23
+    jointB: 25
+    jointC: 27
+    currentAngle: 0
+  - jointName: Tobillo izq
+    group: 8
+    jointA: 25
+    jointB: 27
+    jointC: 31
+    currentAngle: 0
+  _poseOverlay: {fileID: 1064799469}
+  _invertNeckSides: 0
+  _logInterval: 0.5
 --- !u!224 &1229135957 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef,
