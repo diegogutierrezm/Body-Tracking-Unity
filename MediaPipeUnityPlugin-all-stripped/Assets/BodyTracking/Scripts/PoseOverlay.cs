@@ -17,12 +17,16 @@ namespace BodyTracking
     [SerializeField] private Color _neckColor = Color.magenta;
     [SerializeField] private Color _headTopColor = Color.yellow;
 
-    [Header("Depuración")]
-    [SerializeField] private bool _logHeadTilt;
+    [Header("Suavizado (One Euro Filter)")]
+    [SerializeField, Tooltip("Más bajo = menos temblor en reposo (pero más retraso)")]
+    private float _minCutoff = 1f;
+    [SerializeField, Tooltip("Más alto = menos retraso en movimientos rápidos (en píxeles)")]
+    private float _beta = 0.005f;
 
     public float HeadTiltAngle { get; private set; }
 
     private readonly Vector2[] _points = new Vector2[Count];
+    private readonly PointSmoother _smoother = new PointSmoother(Count);
     private PoseLandmarkListAnnotation _annotation;
     private MarkerPoint _neck, _headTop;
     private EllipseRenderer _headEllipse;
@@ -45,6 +49,9 @@ namespace BodyTracking
 
       bool visible = landmarks[LeftShoulder].isActive && landmarks[RightShoulder].isActive;
 
+      if (visible) _smoother.Apply(_points, Time.unscaledTime, _minCutoff, _beta);
+      else _smoother.Reset();
+
       var neck = (_points[LeftShoulder] + _points[RightShoulder]) * 0.5f;
       var head = HeadEllipse.FromLandmarks(_points, _head);
       var top = head.Top;
@@ -55,7 +62,6 @@ namespace BodyTracking
       if (visible) _headEllipse.Draw(head);
 
       HeadTiltAngle = HeadTilt.Compute(_points[LeftShoulder], _points[RightShoulder], top);
-      if (_logHeadTilt) Debug.Log($"Inclinación cabeza: {HeadTiltAngle:F1}°");
     }
 
     private void CreateViews(PoseLandmarkListAnnotation annotation)
