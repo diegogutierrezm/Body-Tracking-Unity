@@ -464,6 +464,8 @@ GameObject:
   - component: {fileID: 1064799468}
   - component: {fileID: 1064799469}
   - component: {fileID: 1064799470}
+  - component: {fileID: 1064799471}
+  - component: {fileID: 1064799472}
   m_Layer: 0
   m_Name: Solution
   m_TagString: Untagged
@@ -525,6 +527,8 @@ MonoBehaviour:
   _headColor: {r: 1, g: 1, b: 1, a: 1}
   _neckColor: {r: 1, g: 0, b: 1, a: 1}
   _headTopColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _minCutoff: 1
+  _beta: 0.005
 --- !u!114 &1064799470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,6 +607,54 @@ MonoBehaviour:
   _poseOverlay: {fileID: 1064799469}
   _invertNeckSides: 0
   _logInterval: 0.5
+  _smooth: 1
+  _minCutoff: 1
+  _beta2D: 0.005
+  _beta3D: 0.5
+--- !u!114 &1064799471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064799459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d3d43d15289a64d916050f3b27bfc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minDistance: 2.5
+  _maxDistance: 3.5
+  _settings:
+    shoulderWidth: 0.38
+    torsoLength: 0.5
+    horizontalFov: 70
+  _calibrationDistance: 2
+  _calibrationKey: 99
+  _logInterval: 1
+  _smoothing: 0.2
+--- !u!114 &1064799472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064799459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f392fc74744a14ba67c272660db9bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _thresholds:
+    minBrightness: 0.25
+    maxBrightness: 0.75
+    minContrast: 0.12
+    maxOverexposed: 0.1
+    maxUnderexposed: 0.2
+    maxBacklightRatio: 1.4
+  _interval: 2
+  _sampleWidth: 64
+  _flipPersonX: 1
 --- !u!224 &1229135957 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef,
