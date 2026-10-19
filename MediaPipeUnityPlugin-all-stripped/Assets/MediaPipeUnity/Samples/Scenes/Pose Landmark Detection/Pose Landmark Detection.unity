@@ -525,6 +525,8 @@ MonoBehaviour:
   _headColor: {r: 1, g: 1, b: 1, a: 1}
   _neckColor: {r: 1, g: 0, b: 1, a: 1}
   _headTopColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _minCutoff: 1
+  _beta: 0.005
 --- !u!114 &1064799470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,6 +605,10 @@ MonoBehaviour:
   _poseOverlay: {fileID: 1064799469}
   _invertNeckSides: 0
   _logInterval: 0.5
+  _smooth: 1
+  _minCutoff: 1
+  _beta2D: 0.005
+  _beta3D: 0.5
 --- !u!224 &1229135957 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef,
@@ -818,6 +824,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1607740079663057916, guid: 140d1d2c406167c50819d89f86d9092e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607740079663057916, guid: 140d1d2c406167c50819d89f86d9092e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607740079663057916, guid: 140d1d2c406167c50819d89f86d9092e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607740079663057916, guid: 140d1d2c406167c50819d89f86d9092e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4073763783843571378, guid: 140d1d2c406167c50819d89f86d9092e,
         type: 3}
       propertyPath: m_AnchorMax.y
