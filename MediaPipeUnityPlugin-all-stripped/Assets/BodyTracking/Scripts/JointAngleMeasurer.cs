@@ -8,6 +8,13 @@ using static BodyTracking.PoseLandmarkIndex;
 
 namespace BodyTracking
 {
+
+    [System.Serializable]
+    public class JointUIBinding
+    {
+        public string jointName;
+        public ArticulacionUI cartel;
+    }
     // Mide los ángulos de las articulaciones (en 2D o 3D) y escribe en la Console los del grupo seleccionado
     public class JointAngleMeasurer : MonoBehaviour
     {
@@ -16,6 +23,8 @@ namespace BodyTracking
         [SerializeField] private AngleSpace _space = AngleSpace.Screen2D;
 
         [Header("Articulaciones (el ángulo se mide en B)")]
+        [Header("Interfaz")]
+        [SerializeField] private JointUIBinding[] _carteles;
         [SerializeField] private JointDefinition[] _joints = JointDefinition.Defaults();
 
         [Header("Cuello")]
@@ -51,6 +60,8 @@ namespace BodyTracking
         {
             // Si no se ha arrastrado en el Inspector, lo busca en la escena
             if (_poseOverlay == null) _poseOverlay = FindFirstObjectByType<PoseOverlay>();
+
+            UpdateUIVisibility();
         }
 
         private void OnEnable()
@@ -81,6 +92,8 @@ namespace BodyTracking
                 case 5: _visibleGroups = BodyGroup.Neck; break;
                 default: _visibleGroups = (BodyGroup)~0; break; // todo
             }
+
+            UpdateUIVisibility();
         }
 
         // Para un Toggle de UI: false = 2D, true = 3D
@@ -100,6 +113,8 @@ namespace BodyTracking
 
             if (!UpdateAngles(landmarks)) return;
             if (_poseOverlay != null) NeckAngle = _poseOverlay.HeadTiltAngle;
+
+            UpdateUI();
 
             if (Time.time < _nextLogTime) return;
             _nextLogTime = Time.time + _logInterval;
@@ -160,12 +175,85 @@ namespace BodyTracking
                 _visibleGroups |= group; // Añade el grupo
             else
                 _visibleGroups &= ~group; // Quita el grupo
+
+            UpdateUIVisibility();
         }
 
         // Activa todos o ninguno
         public void SetAllGroups(bool enableAll)
         {
             _visibleGroups = enableAll ? (BodyGroup)~0 : BodyGroup.None;
+
+            UpdateUIVisibility();
+        }
+
+        private void UpdateUI()
+        {
+            if (_carteles == null) return;
+
+            foreach (var binding in _carteles)
+            {
+                if (binding == null || binding.cartel == null)
+                    continue;
+
+                JointDefinition joint = null;
+
+                foreach (var candidate in _joints)
+                {
+                    if (candidate.jointName == binding.jointName)
+                    {
+                        joint = candidate;
+                        break;
+                    }
+                }
+
+                if (joint == null)
+                    continue;
+
+                bool visible = (_visibleGroups & joint.group) != 0;
+
+                binding.cartel.ActualizarAngulo(joint.currentAngle);
+                binding.cartel.AlternarVisibilidad(visible);
+            }
+        }
+
+        private void UpdateUIVisibility()
+        {
+            if (_carteles == null) return;
+
+            foreach (var binding in _carteles)
+            {
+                if (binding == null || binding.cartel == null)
+                    continue;
+
+                JointDefinition joint = null;
+
+                foreach (var candidate in _joints)
+                {
+                    if (candidate.jointName == binding.jointName)
+                    {
+                        joint = candidate;
+                        break;
+                    }
+                }
+
+                if (joint == null)
+                {
+                    binding.cartel.AlternarVisibilidad(false);
+                    continue;
+                }
+
+                bool visible = (_visibleGroups & joint.group) != 0;
+                binding.cartel.AlternarVisibilidad(visible);
+            }
+        }
+        public void SeleccionarBrazoIzquierdo(bool activar)
+        {
+            Debug.Log("Toggle brazo izquierdo: " + activar);
+
+            ToggleGroup(BodyGroup.LeftArm, activar);
+
+            UpdateUIVisibility();
         }
     }
 }
