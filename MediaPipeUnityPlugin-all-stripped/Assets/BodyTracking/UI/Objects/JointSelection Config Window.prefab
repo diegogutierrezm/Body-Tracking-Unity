@@ -752,9 +752,8 @@ GameObject:
   - component: {fileID: 1023156908885654714}
   - component: {fileID: 3022269872240732285}
   - component: {fileID: 4554093390874112255}
-  - component: {fileID: 5475146669346879235}
   m_Layer: 5
-  m_Name: ToggleLA
+  m_Name: Toggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -862,20 +861,6 @@ MonoBehaviour:
   m_FlexibleWidth: 3
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &5475146669346879235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1523193240415866747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7e00e4b6922fa24fa3f80415e5c6516, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toggle: {fileID: 3022269872240732285}
-  medidor: {fileID: 0}
 --- !u!1 &1829340681661911978
 GameObject:
   m_ObjectHideFlags: 0

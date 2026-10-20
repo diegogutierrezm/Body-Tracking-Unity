@@ -13,7 +13,7 @@ namespace BodyTracking
       bool right = signedAngle < 0f;
       if (invertSides) right = !right;
 
-      return $"{abs:F0}º {(right ? "derecha" : "izq")}";
+      return $"{abs:F0}º {(right ? "izq" : "der")}";
     }
   }
 }
