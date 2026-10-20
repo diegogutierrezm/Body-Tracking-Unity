@@ -30,4 +30,17 @@ public class ArticulacionUI : MonoBehaviour
         if (panelCartel != null)
             panelCartel.SetActive(activar);
     }
+
+    // Coloca el cartel (en las mismas coordenadas que los puntos de la pose)
+    public void Colocar(Vector2 posicion)
+    {
+        transform.localPosition = new Vector3(posicion.x, posicion.y, 0f);
+    }
+
+    // Para mostrar texto en vez de número (por ejemplo, el cuello: "12º derecha")
+    public void ActualizarTexto(string valor)
+    {
+        if (textoAngulo != null)
+            textoAngulo.text = $"{nombreArticulacion}\n{valor}";
+    }
 }
