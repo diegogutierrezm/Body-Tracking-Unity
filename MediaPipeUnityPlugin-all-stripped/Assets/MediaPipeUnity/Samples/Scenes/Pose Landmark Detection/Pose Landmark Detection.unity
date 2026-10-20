@@ -459,6 +459,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 998048657}
   m_CullTransparentMesh: 1
+--- !u!114 &729296948 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8571076843237194833, guid: 140d1d2c406167c50819d89f86d9092e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8571076842648159877}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ddeec99217ea692c920535a87583a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1006057040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -659,6 +671,15 @@ GameObject:
   - component: {fileID: 1395041258}
   m_Layer: 5
   m_Name: Text (TMP)
+  - component: {fileID: 1064799461}
+  - component: {fileID: 1064799468}
+  - component: {fileID: 1064799469}
+  - component: {fileID: 1064799470}
+  - component: {fileID: 1064799472}
+  - component: {fileID: 1064799473}
+  - component: {fileID: 1064799474}
+  m_Layer: 0
+  m_Name: Solution
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -776,12 +797,150 @@ MonoBehaviour:
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1395041259
 CanvasRenderer:
+  _visibleGroups: 1
+  _space: 0
+  _joints:
+  - jointName: Hombro der
+    group: 1
+    jointA: 24
+    jointB: 12
+    jointC: 14
+    currentAngle: 0
+  - jointName: Codo der
+    group: 1
+    jointA: 12
+    jointB: 14
+    jointC: 16
+    currentAngle: 0
+  - jointName: Hombro izq
+    group: 2
+    jointA: 23
+    jointB: 11
+    jointC: 13
+    currentAngle: 0
+  - jointName: Codo izq
+    group: 2
+    jointA: 11
+    jointB: 13
+    jointC: 15
+    currentAngle: 0
+  - jointName: Cadera der
+    group: 4
+    jointA: 12
+    jointB: 24
+    jointC: 26
+    currentAngle: 0
+  - jointName: Rodilla der
+    group: 4
+    jointA: 24
+    jointB: 26
+    jointC: 28
+    currentAngle: 0
+  - jointName: Tobillo der
+    group: 4
+    jointA: 26
+    jointB: 28
+    jointC: 32
+    currentAngle: 0
+  - jointName: Cadera izq
+    group: 8
+    jointA: 11
+    jointB: 23
+    jointC: 25
+    currentAngle: 0
+  - jointName: Rodilla izq
+    group: 8
+    jointA: 23
+    jointB: 25
+    jointC: 27
+    currentAngle: 0
+  - jointName: Tobillo izq
+    group: 8
+    jointA: 25
+    jointB: 27
+    jointC: 31
+    currentAngle: 0
+  _poseOverlay: {fileID: 1064799469}
+  _invertNeckSides: 0
+  _logInterval: 0.5
+  _smooth: 1
+  _minCutoff: 1
+  _beta2D: 0.005
+  _beta3D: 0.5
+--- !u!114 &1064799472
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395041256}
   m_CullTransparentMesh: 1
+  m_GameObject: {fileID: 1064799459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f392fc74744a14ba67c272660db9bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _thresholds:
+    minBrightness: 0.25
+    maxBrightness: 0.75
+    minContrast: 0.12
+    maxOverexposed: 0.1
+    maxUnderexposed: 0.2
+    maxBacklightRatio: 1.4
+  _interval: 2
+  _sampleWidth: 64
+  _flipPersonX: 1
+--- !u!114 &1064799473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064799459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810ada2a31f98334ca97bbe674e428dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings:
+    edgeMargin: 0.03
+    minBodyHeight: 0.6
+    headTopFactor: 1.7
+  _logInterval: 1
+--- !u!114 &1064799474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064799459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c7c95efb9a00f4896b0f49ddd5a1c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _modalPanel: {fileID: 729296948}
+  _instructionsWindow: {fileID: 6938625115693525800, guid: 006e37df81aff4d4e88bc3112ca2252b,
+    type: 3}
+--- !u!224 &1229135957 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef,
+    type: 3}
+  m_PrefabInstance: {fileID: 1006057040}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1229135959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3259285889726014649, guid: 5713b959e3c77a58fb258133fc8e4aef,
+    type: 3}
+  m_PrefabInstance: {fileID: 1006057040}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1806680259
 GameObject:
   m_ObjectHideFlags: 0
