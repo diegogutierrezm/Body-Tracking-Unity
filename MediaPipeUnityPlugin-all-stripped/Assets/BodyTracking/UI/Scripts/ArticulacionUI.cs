@@ -8,7 +8,7 @@ public class ArticulacionUI : MonoBehaviour
     public TextMeshProUGUI textoAngulo;
 
     [Header("Configuración")]
-    public string nombreArticulacion = "Codo izq";
+    public string nombreArticulacion;
 
     private void Awake()
     {

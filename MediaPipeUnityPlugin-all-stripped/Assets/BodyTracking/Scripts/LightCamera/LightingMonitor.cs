@@ -7,7 +7,7 @@ using static BodyTracking.PoseLandmarkIndex;
 
 namespace BodyTracking
 {
-    // Analiza la iluminación cada pocos segundos y escribe instrucciones en la Console
+    // Analiza la iluminación cada pocos segundos y da instrucciones
     public class LightingMonitor : MonoBehaviour
     {
         [SerializeField] private LightingThresholds _thresholds = new LightingThresholds();
@@ -18,9 +18,12 @@ namespace BodyTracking
 
         public LightingReport LastReport { get; private set; }
 
+        // NUEVO: lo que hay que corregir. Si está vacía, la iluminación es correcta
+        public IReadOnlyList<string> Messages => _messages;
+
         private FrameSampler _sampler;
         private readonly List<string> _messages = new List<string>();
-        private Rect _personRect;     // zona de la persona en 0-1
+        private Rect _personRect;     // zona de la cara en 0-1
         private float _personRectTime = -10f;
         private float _nextTime;
 
@@ -48,17 +51,10 @@ namespace BodyTracking
 
             LastReport = LightingAnalyzer.Analyze(pixels, width, height, personRect);
             LightingAdvisor.Advise(LastReport, _thresholds, _messages);
-            Debug.Log("Iluminación: " + string.Join("   |   ", _messages));
 
-            Debug.Log($"Brillo {LastReport.Brightness:F2}  Contraste {LastReport.Contrast:F2} " +
-                $" Quemado {LastReport.Overexposed:P0}  Persona {LastReport.PersonBrightness:F2}  " +
-                $"Fondo {LastReport.BackgroundBrightness:F2}");
-           
+            Debug.Log("Iluminación: " + (_messages.Count == 0 ? "correcta" : string.Join("   |   ", _messages)));
         }
 
-        // Guarda en qué zona de la imagen está la persona, a partir de sus puntos
-        // Guarda la zona del tronco (entre hombros y caderas), que casi siempre es cuerpo y no fondo
-        // Guarda en qué zona de la imagen está la persona, a partir de sus puntos
         // Guarda la zona de la cara (puntos 0-10): la piel es la mejor referencia para saber si hay contraluz
         private void OnPoseDrawn(PoseLandmarkListAnnotation annotation)
         {

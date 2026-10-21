@@ -1,19 +1,27 @@
+using System.Collections;
 using Mediapipe.Unity.Sample.UI;
 using UnityEngine;
 
 namespace BodyTracking
 {
-    // Abre la ventana de instrucciones al darle a Play, usando el mismo Modal que las otras ventanas
+    // Abre las ventanas de instrucciones al darle a Play, una detrás de otra
     public class ShowInstructionsOnStart : MonoBehaviour
     {
         [SerializeField] private Modal _modalPanel;
-        [SerializeField] private GameObject _instructionsWindow;
+        [SerializeField, Tooltip("Se muestran en este orden")] private GameObject[] _windows;
 
-        private void Start()
+        private IEnumerator Start()
         {
-            if (_modalPanel != null && _instructionsWindow != null)
+            if (_modalPanel == null) yield break;
+
+            foreach (var window in _windows)
             {
-                _modalPanel.Open(_instructionsWindow);
+                if (window == null) continue;
+
+                _modalPanel.Open(window);
+
+                // Espera a que se pulse Continuar (Modal.Close desactiva el panel)
+                yield return new WaitWhile(() => _modalPanel.gameObject.activeSelf);
             }
         }
     }
