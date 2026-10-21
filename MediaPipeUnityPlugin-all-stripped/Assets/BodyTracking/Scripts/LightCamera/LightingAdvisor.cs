@@ -39,8 +39,6 @@ namespace BodyTracking
             if (r.HasPerson && r.BackgroundBrightness > r.PersonBrightness * t.maxBacklightRatio)
                 messages.Add("Contraluz: el fondo está mucho más iluminado que tú. Ponte de cara a la luz, no de espaldas");
 
-            if (messages.Count == 0)
-                messages.Add("Iluminación correcta");
         }
     }
 }

@@ -20,7 +20,6 @@ namespace BodyTracking
             if (r.FullBodyVisible && r.BodyHeight < s.minBodyHeight)
                 messages.Add($"Acércate: ocupas solo el {r.BodyHeight:P0} de la imagen");
 
-            if (messages.Count == 0) messages.Add("Distancia correcta");
         }
     }
 }

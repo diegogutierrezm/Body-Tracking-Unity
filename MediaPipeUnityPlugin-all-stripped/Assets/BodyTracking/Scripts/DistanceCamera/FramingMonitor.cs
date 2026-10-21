@@ -5,7 +5,7 @@ using static BodyTracking.PoseLandmarkIndex;
 
 namespace BodyTracking
 {
-    // Comprueba si el cuerpo entero está dentro de la imagen y da instrucciones por la Console
+    // Comprueba si el cuerpo entero está dentro de la imagen y da instrucciones
     public class FramingMonitor : MonoBehaviour
     {
         [SerializeField] private FramingSettings _settings = new FramingSettings();
@@ -14,9 +14,16 @@ namespace BodyTracking
         public FramingReport LastReport { get; private set; }
         public bool FullBodyVisible => LastReport.FullBodyVisible;
 
+        // NUEVO: lo que hay que corregir. Si está vacía, el encuadre es correcto
+        public IReadOnlyList<string> Messages => _messages;
+
+        // NUEVO: true si se ha detectado a alguien hace menos de medio segundo
+        public bool HasPerson => Time.time - _lastPoseTime < 0.5f;
+
         private readonly Vector2[] _points = new Vector2[Count];
         private readonly List<string> _messages = new List<string>();
         private float _nextLogTime;
+        private float _lastPoseTime = -10f; // NUEVO
 
         private void OnEnable() => PoseLandmarkListAnnotation.Drawn += OnPoseDrawn;
         private void OnDisable() => PoseLandmarkListAnnotation.Drawn -= OnPoseDrawn;
@@ -37,12 +44,13 @@ namespace BodyTracking
             }
 
             LastReport = FramingAnalyzer.Analyze(_points, _settings);
+            FramingGuide.Advise(LastReport, _settings, _messages); // NUEVO: se calcula siempre, para el cartel
+            _lastPoseTime = Time.time;                             // NUEVO
 
             if (Time.time < _nextLogTime) return;
             _nextLogTime = Time.time + _logInterval;
 
-            FramingGuide.Advise(LastReport, _settings, _messages);
-            Debug.Log("Encuadre: " + string.Join("   |   ", _messages));
+            Debug.Log("Encuadre: " + (_messages.Count == 0 ? "correcto" : string.Join("   |   ", _messages)));
         }
     }
 }
