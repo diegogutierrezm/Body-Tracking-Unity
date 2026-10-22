@@ -52,7 +52,6 @@ namespace BodyTracking
             LastReport = LightingAnalyzer.Analyze(pixels, width, height, personRect);
             LightingAdvisor.Advise(LastReport, _thresholds, _messages);
 
-            Debug.Log("Iluminación: " + (_messages.Count == 0 ? "correcta" : string.Join("   |   ", _messages)));
         }
 
         // Guarda la zona de la cara (puntos 0-10): la piel es la mejor referencia para saber si hay contraluz

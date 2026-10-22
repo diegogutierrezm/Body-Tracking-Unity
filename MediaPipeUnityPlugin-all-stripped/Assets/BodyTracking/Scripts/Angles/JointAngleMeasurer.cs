@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text;
 using Mediapipe.Tasks.Components.Containers;
 using Mediapipe.Unity;
 using Mediapipe.Unity.Sample.PoseLandmarkDetection;
@@ -23,9 +22,6 @@ namespace BodyTracking
         [SerializeField] private PoseOverlay _poseOverlay;
         [SerializeField] private bool _invertNeckSides;
 
-        [Header("Console")]
-        [SerializeField, Tooltip("Segundos entre cada mensaje")] private float _logInterval = 0.5f;
-
         [Header("Suavizado (One Euro Filter)")]
         [SerializeField] private bool _smooth = true;
         [SerializeField, Tooltip("Más bajo = menos temblor en reposo (pero más retraso)")]
@@ -45,10 +41,8 @@ namespace BodyTracking
         private readonly Vector2[] _points2D = new Vector2[Count];
         private readonly Vector3[] _points3D = new Vector3[Count];
         private readonly WorldPoseBuffer _worldPose = new WorldPoseBuffer();
-        private readonly StringBuilder _log = new StringBuilder();
         private readonly PointSmoother _smoother2D = new PointSmoother(Count);
         private readonly PointSmoother _smoother3D = new PointSmoother(Count);
-        private float _nextLogTime;
 
         private void Awake()
         {
@@ -104,10 +98,6 @@ namespace BodyTracking
             if (!UpdateAngles(landmarks)) return;
             if (_poseOverlay != null) NeckAngle = _poseOverlay.HeadTiltAngle;
 
-
-            if (Time.time < _nextLogTime) return;
-            _nextLogTime = Time.time + _logInterval;
-            WriteLog();
         }
 
         // Calcula todos los ángulos en el espacio elegido. Devuelve false si no hay datos.
@@ -133,30 +123,6 @@ namespace BodyTracking
             return true;
         }
 
-        // Escribe en la Console solo los ángulos del grupo seleccionado
-        private void WriteLog()
-        {
-            _log.Clear();
-            _log.Append(_space == AngleSpace.World3D ? "[3D]  " : "[2D]  ");
-
-            foreach (var joint in _joints)
-            {
-                if ((_visibleGroups & joint.group) != 0)
-                    _log.Append(joint.jointName).Append(": ").Append(joint.currentAngle.ToString("F0")).Append("º   ");
-            }
-            if (_poseOverlay != null && (_visibleGroups & BodyGroup.Neck) != 0)
-                _log.Append("Cuello: ").Append(TiltText.Format(NeckAngle, _invertNeckSides));
-
-            Debug.Log(_log.ToString());
-        }
-        public void SelectJoint(int jointIndex)
-        {
-            if (jointIndex >= 0 && jointIndex < _joints.Length)
-            {
-                _visibleGroups = _joints[jointIndex].group;
-                Debug.Log($"Articulación seleccionada: {_joints[jointIndex].jointName}");
-            }
-        }
         // Activa o desactiva un grupo específico manteniendo los otros
         public void ToggleGroup(BodyGroup group, bool enable)
         {
