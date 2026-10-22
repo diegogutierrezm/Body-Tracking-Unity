@@ -9,7 +9,6 @@ namespace BodyTracking
     public class FramingMonitor : MonoBehaviour
     {
         [SerializeField] private FramingSettings _settings = new FramingSettings();
-        [SerializeField, Tooltip("Segundos entre cada mensaje")] private float _logInterval = 1f;
 
         public FramingReport LastReport { get; private set; }
         public bool FullBodyVisible => LastReport.FullBodyVisible;
@@ -22,7 +21,6 @@ namespace BodyTracking
 
         private readonly Vector2[] _points = new Vector2[Count];
         private readonly List<string> _messages = new List<string>();
-        private float _nextLogTime;
         private float _lastPoseTime = -10f; // NUEVO
 
         private void OnEnable() => PoseLandmarkListAnnotation.Drawn += OnPoseDrawn;
@@ -47,10 +45,6 @@ namespace BodyTracking
             FramingGuide.Advise(LastReport, _settings, _messages); // NUEVO: se calcula siempre, para el cartel
             _lastPoseTime = Time.time;                             // NUEVO
 
-            if (Time.time < _nextLogTime) return;
-            _nextLogTime = Time.time + _logInterval;
-
-            Debug.Log("Encuadre: " + (_messages.Count == 0 ? "correcto" : string.Join("   |   ", _messages)));
         }
     }
 }
