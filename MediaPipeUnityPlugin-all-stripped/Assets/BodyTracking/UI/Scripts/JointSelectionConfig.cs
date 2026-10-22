@@ -15,7 +15,7 @@ namespace Mediapipe.Unity.Sample.UI
         private const string _NeckTogglePath = "Scroll View/Viewport/Contents/Neck/Toggle";
 
         private JointAngleMeasurer _jointMeasurer;
-        private bool _isChanged;
+        
 
         private void Start()
         {
@@ -25,7 +25,7 @@ namespace Mediapipe.Unity.Sample.UI
 
         public override void Exit()
         {
-            GetModal().CloseAndResume(_isChanged);
+            GetModal().CloseAndResume(false);
         }
 
         private void InitializeToggles()
@@ -64,7 +64,6 @@ namespace Mediapipe.Unity.Sample.UI
                 else
                     _jointMeasurer.VisibleGroups &= ~group;  // Quita el grupo de los flags
 
-                _isChanged = true;
             });
         }
     }
