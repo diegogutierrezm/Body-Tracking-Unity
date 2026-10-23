@@ -1248,61 +1248,61 @@ MonoBehaviour:
   _visibleGroups: 0
   _space: 0
   _joints:
-  - jointName: Hombro der
+  - jointName: Right shoulder
     group: 1
     jointA: 24
     jointB: 12
     jointC: 14
     currentAngle: 0
-  - jointName: Codo der
+  - jointName: Right elbow
     group: 1
     jointA: 12
     jointB: 14
     jointC: 16
     currentAngle: 0
-  - jointName: Hombro izq
+  - jointName: Left shoulder
     group: 2
     jointA: 23
     jointB: 11
     jointC: 13
     currentAngle: 0
-  - jointName: Codo izq
+  - jointName: Left elbow
     group: 2
     jointA: 11
     jointB: 13
     jointC: 15
     currentAngle: 0
-  - jointName: Cadera der
+  - jointName: Right hip
     group: 4
     jointA: 12
     jointB: 24
     jointC: 26
     currentAngle: 0
-  - jointName: Rodilla der
+  - jointName: Right knee
     group: 4
     jointA: 24
     jointB: 26
     jointC: 28
     currentAngle: 0
-  - jointName: Tobillo der
+  - jointName: Right ankle
     group: 4
     jointA: 26
     jointB: 28
     jointC: 32
     currentAngle: 0
-  - jointName: Cadera izq
+  - jointName: Left hip
     group: 8
     jointA: 11
     jointB: 23
     jointC: 25
     currentAngle: 0
-  - jointName: Rodilla izq
+  - jointName: Left knee
     group: 8
     jointA: 23
     jointB: 25
     jointC: 27
     currentAngle: 0
-  - jointName: Tobillo izq
+  - jointName: Left ankle
     group: 8
     jointA: 25
     jointB: 27

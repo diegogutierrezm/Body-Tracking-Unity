@@ -44,7 +44,7 @@ namespace Mediapipe.Unity.Sample.UI
             var target = gameObject.transform.Find(path);
             if (target == null)
             {
-                Debug.LogWarning($"No se encontró el Toggle en la ruta: {path}");
+                Debug.LogWarning($"Toggle not found at path: {path}");
                 return;
             }
 

@@ -9,16 +9,16 @@ namespace BodyTracking
         {
             messages.Clear();
 
-            if (r.CutTop && r.CutBottom) messages.Add("Aléjate: se cortan la cabeza y los pies");
-            else if (r.CutTop) messages.Add("Aléjate: se corta la cabeza");
-            else if (r.CutBottom) messages.Add("Aléjate: no se ven los pies");
+            if (r.CutTop && r.CutBottom) messages.Add("Step back: your head and feet are cut off");
+            else if (r.CutTop) messages.Add("Step back: your head is cut off");
+            else if (r.CutBottom) messages.Add("Step back: your feet are not visible");
 
-            if (r.CutLeft && r.CutRight) messages.Add("Aléjate: te sales por los dos lados");
-            else if (r.CutLeft) messages.Add("Te sales por la izquierda de la pantalla: muévete hacia el centro");
-            else if (r.CutRight) messages.Add("Te sales por la derecha de la pantalla: muévete hacia el centro");
+            if (r.CutLeft && r.CutRight) messages.Add("Step back: you are out of frame on both sides");
+            else if (r.CutLeft) messages.Add("You are out of frame on the left of the screen: move to the center");
+            else if (r.CutRight) messages.Add("You are out of frame on the right of the screen: move to the center");
 
             if (r.FullBodyVisible && r.BodyHeight < s.minBodyHeight)
-                messages.Add($"Acércate: ocupas solo el {r.BodyHeight:P0} de la imagen");
+                messages.Add($"Move closer: you only fill {r.BodyHeight:P0} of the image");
 
         }
     }

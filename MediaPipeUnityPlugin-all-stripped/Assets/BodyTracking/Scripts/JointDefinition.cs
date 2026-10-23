@@ -7,13 +7,13 @@ namespace BodyTracking
   [Serializable]
   public class JointDefinition
   {
-    public string jointName;   // Ej: "Codo der", "Rodilla izq"
+    public string jointName;   // Ej: "Right elbow", "Left knee"
     public BodyGroup group;
 
-    [Header("Articulaciones (origen en el medio)")]
-    [Range(0, 32), Tooltip("Punto superior (ej: hombro)")] public int jointA;
-    [Range(0, 32), Tooltip("Punto medio/pivote (ej: codo)")] public int jointB;
-    [Range(0, 32), Tooltip("Punto inferior (ej: muñeca)")] public int jointC;
+    [Header("Joints (vertex in the middle)")]
+    [Range(0, 32), Tooltip("Upper point (e.g. shoulder)")] public int jointA;
+    [Range(0, 32), Tooltip("Middle point / vertex (e.g. elbow)")] public int jointB;
+    [Range(0, 32), Tooltip("Lower point (e.g. wrist)")] public int jointC;
 
     [HideInInspector] public float currentAngle;
 
@@ -31,16 +31,16 @@ namespace BodyTracking
     // Articulaciones que vienen configuradas por defecto
     public static JointDefinition[] Defaults() => new[]
     {
-      new JointDefinition("Hombro der", BodyGroup.RightArm, RightHip, RightShoulder, RightElbow),
-      new JointDefinition("Codo der", BodyGroup.RightArm, RightShoulder, RightElbow, RightWrist),
-      new JointDefinition("Hombro izq", BodyGroup.LeftArm, LeftHip, LeftShoulder, LeftElbow),
-      new JointDefinition("Codo izq", BodyGroup.LeftArm, LeftShoulder, LeftElbow, LeftWrist),
-      new JointDefinition("Cadera der", BodyGroup.RightLeg, RightShoulder, RightHip, RightKnee),
-      new JointDefinition("Rodilla der", BodyGroup.RightLeg, RightHip, RightKnee, RightAnkle),
-      new JointDefinition("Tobillo der", BodyGroup.RightLeg, RightKnee, RightAnkle, RightFootIndex),
-      new JointDefinition("Cadera izq", BodyGroup.LeftLeg, LeftShoulder, LeftHip, LeftKnee),
-      new JointDefinition("Rodilla izq", BodyGroup.LeftLeg, LeftHip, LeftKnee, LeftAnkle),
-      new JointDefinition("Tobillo izq", BodyGroup.LeftLeg, LeftKnee, LeftAnkle, LeftFootIndex),
+      new JointDefinition("Right shoulder", BodyGroup.RightArm, RightHip, RightShoulder, RightElbow),
+      new JointDefinition("Right elbow", BodyGroup.RightArm, RightShoulder, RightElbow, RightWrist),
+      new JointDefinition("Left shoulder", BodyGroup.LeftArm, LeftHip, LeftShoulder, LeftElbow),
+      new JointDefinition("Left elbow", BodyGroup.LeftArm, LeftShoulder, LeftElbow, LeftWrist),
+      new JointDefinition("Right hip", BodyGroup.RightLeg, RightShoulder, RightHip, RightKnee),
+      new JointDefinition("Right knee", BodyGroup.RightLeg, RightHip, RightKnee, RightAnkle),
+      new JointDefinition("Right ankle", BodyGroup.RightLeg, RightKnee, RightAnkle, RightFootIndex),
+      new JointDefinition("Left hip", BodyGroup.LeftLeg, LeftShoulder, LeftHip, LeftKnee),
+      new JointDefinition("Left knee", BodyGroup.LeftLeg, LeftHip, LeftKnee, LeftAnkle),
+      new JointDefinition("Left ankle", BodyGroup.LeftLeg, LeftKnee, LeftAnkle, LeftFootIndex),
     };
   }
 }

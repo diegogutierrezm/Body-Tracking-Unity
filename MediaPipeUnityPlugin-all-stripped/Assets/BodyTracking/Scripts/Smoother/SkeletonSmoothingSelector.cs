@@ -9,7 +9,7 @@ namespace BodyTracking
     public class SkeletonSmoothingSelector : MonoBehaviour
     {
         // Mismo orden que el enum SmoothingLevel: Off, Low, Medium, High
-        private static readonly List<string> Options = new List<string> { "Sin suavizado", "Bajo", "Medio", "Alto" };
+        private static readonly List<string> Options = new List<string> { "Off", "Low", "Medium", "High" };
 
         private void Start()
         {

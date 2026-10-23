@@ -10,25 +10,25 @@ namespace BodyTracking
     // Mide los ángulos de las articulaciones (en 2D o 3D) y escribe en la Console los del grupo seleccionado
     public class JointAngleMeasurer : MonoBehaviour
     {
-        [Header("Qué se muestra")]
+        [Header("What is shown")]
         [SerializeField] private BodyGroup _visibleGroups = BodyGroup.RightArm;
         [SerializeField] private AngleSpace _space = AngleSpace.Screen2D;
 
-        [Header("Articulaciones (el ángulo se mide en B)")]
+        [Header("Joints (the angle is measured at B)")]
       
         [SerializeField] private JointDefinition[] _joints = JointDefinition.Defaults();
 
-        [Header("Cuello")]
+        [Header("Neck")]
         [SerializeField] private PoseOverlay _poseOverlay;
         [SerializeField] private bool _invertNeckSides;
 
-        [Header("Suavizado (One Euro Filter)")]
+        [Header("Smoothing (One Euro Filter)")]
         [SerializeField] private bool _smooth = true;
-        [SerializeField, Tooltip("Más bajo = menos temblor en reposo (pero más retraso)")]
+        [SerializeField, Tooltip("Lower = less jitter at rest (but more lag)")]
         private float _minCutoff = 1f;
-        [SerializeField, Tooltip("Más alto = menos retraso en movimientos rápidos. 2D va en píxeles")]
+        [SerializeField, Tooltip("Higher = less lag on fast movements. 2D is in pixels")]
         private float _beta2D = 0.005f;
-        [SerializeField, Tooltip("Más alto = menos retraso en movimientos rápidos. 3D va en metros")]
+        [SerializeField, Tooltip("Higher = less lag on fast movements. 3D is in meters")]
         private float _beta3D = 0.5f;
 
         public BodyGroup VisibleGroups { get => _visibleGroups; set => _visibleGroups = value; }
@@ -36,7 +36,7 @@ namespace BodyTracking
         public JointDefinition[] Joints => _joints;
         public float NeckAngle { get; private set; }
 
-        // Texto del cuello: "12º derecha", "8º izq" o "0º"
+        // Texto del cuello: "12º right", "8º left" o "0º"
         public string NeckText => TiltText.Format(NeckAngle, _invertNeckSides);
         private readonly Vector2[] _points2D = new Vector2[Count];
         private readonly Vector3[] _points3D = new Vector3[Count];

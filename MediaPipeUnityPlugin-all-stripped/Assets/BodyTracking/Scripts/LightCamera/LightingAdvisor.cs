@@ -10,9 +10,9 @@ namespace BodyTracking
         [Range(0f, 1f)] public float minBrightness = 0.25f;
         [Range(0f, 1f)] public float maxBrightness = 0.75f;
         [Range(0f, 1f)] public float minContrast = 0.12f;
-        [Range(0f, 1f), Tooltip("Máximo de imagen quemada (casi blanca)")] public float maxOverexposed = 0.08f;
-        [Range(0f, 1f), Tooltip("Máximo de imagen casi negra")] public float maxUnderexposed = 0.20f;
-        [Tooltip("Si el fondo es X veces más brillante que la persona, hay contraluz")] public float maxBacklightRatio = 1.1f;
+        [Range(0f, 1f), Tooltip("Maximum fraction of the image that can be overexposed (almost white)")] public float maxOverexposed = 0.08f;
+        [Range(0f, 1f), Tooltip("Maximum fraction of the image that can be almost black")] public float maxUnderexposed = 0.20f;
+        [Tooltip("If the background is X times brighter than the person, there is backlight")] public float maxBacklightRatio = 1.1f;
     }
 
     // Convierte el análisis en instrucciones para la persona
@@ -23,21 +23,21 @@ namespace BodyTracking
             messages.Clear();
 
             if (r.Brightness < t.minBrightness)
-                messages.Add($"Poca luz ({r.Brightness:P0}): enciende más luces o ponte frente a una ventana");
+                messages.Add($"Too dark ({r.Brightness:P0}): turn on more lights or face a window");
             else if (r.Brightness > t.maxBrightness)
-                messages.Add($"Demasiada luz ({r.Brightness:P0}): baja las persianas o reduce la luz");
+                messages.Add($"Too bright ({r.Brightness:P0}): lower the blinds or dim the light");
 
             if (r.Overexposed > t.maxOverexposed)
-                messages.Add($"Luz directa: el {r.Overexposed:P0} de la imagen está quemado. Evita que el sol o un foco den en la cámara o directamente sobre ti");
+                messages.Add($"Direct light: {r.Overexposed:P0} of the image is overexposed. Keep the sun or spotlights off the camera and off you");
 
             if (r.Underexposed > t.maxUnderexposed)
-                messages.Add($"Sombras fuertes: el {r.Underexposed:P0} de la imagen está casi negro. Ilumina esa zona");
+                messages.Add($"Strong shadows: {r.Underexposed:P0} of the image is almost black. Light up that area");
 
             if (r.Contrast < t.minContrast)
-                messages.Add("Poco contraste: la imagen se ve plana. Usa ropa que contraste con el fondo y una luz de frente");
+                messages.Add("Low contrast: the image looks flat. Wear clothes that contrast with the background and use front lighting");
 
             if (r.HasPerson && r.BackgroundBrightness > r.PersonBrightness * t.maxBacklightRatio)
-                messages.Add("Contraluz: el fondo está mucho más iluminado que tú. Ponte de cara a la luz, no de espaldas");
+                messages.Add("Backlight: the background is much brighter than you. Face the light, don't stand with your back to it");
 
         }
     }

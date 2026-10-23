@@ -11,9 +11,9 @@ namespace BodyTracking
     public class LightingMonitor : MonoBehaviour
     {
         [SerializeField] private LightingThresholds _thresholds = new LightingThresholds();
-        [SerializeField, Tooltip("Segundos entre cada análisis")] private float _interval = 2f;
-        [SerializeField, Range(16, 256), Tooltip("Ancho de la copia que se analiza")] private int _sampleWidth = 64;
-        [SerializeField, Tooltip("Marcar si la zona de la cara se mide en el lado contrario de la imagen")]
+        [SerializeField, Tooltip("Seconds between analyses")] private float _interval = 2f;
+        [SerializeField, Range(16, 256), Tooltip("Width of the downscaled copy that is analyzed")] private int _sampleWidth = 64;
+        [SerializeField, Tooltip("Check if the face area is measured on the opposite side of the image")]
         private bool _flipPersonX = true;
 
         public LightingReport LastReport { get; private set; }
