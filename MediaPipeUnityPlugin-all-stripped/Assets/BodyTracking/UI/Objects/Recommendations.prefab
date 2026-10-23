@@ -1067,12 +1067,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "<size=70><b>Antes de empezar</b></size>\r\n\r\n<b>1. Iluminacion y entorno</b>\r\n  
-    \u2022  Evita la luz directa y el contraluz\r\n   \u2022  Iluminaci\xF3n difusa
-    y homogenea\r\n   \u2022  Contraste con el fondo\r\n   \u2022  Cuidado con los
-    espejos y superficies reflectantes\r\n\r\n<b>2. Ropa y preparacion</b>\r\n  
-    \u2022  Ropa ajustada o definida\r\n   \u2022  Evita patrones disruptivos (rayas,
-    cuadros, estampados grandes)\r\n   \u2022  Colocate de cuerpo completo ante la
-    camara\r\n\r\n<b>3. Posicion de la camara</b>\r\n   \u2022  Angulo frontal y
-    a la altura del pecho\r\n   \u2022  Evita las oclusiones (que nada tape partes
-    del cuerpo)"
+  m_Text: "<size=70><b>Before you start</b></size>\r\n\r\n<b>1. Lighting and environment</b>\r\n   \u2022  Avoid direct light and backlight\r\n   \u2022  Diffuse, even lighting\r\n   \u2022  Contrast with the background\r\n   \u2022  Watch out for mirrors and reflective surfaces\r\n\r\n<b>2. Clothing and preparation</b>\r\n   \u2022  Fitted or well-defined clothing\r\n   \u2022  Avoid busy patterns (stripes, checks, large prints)\r\n   \u2022  Stand with your full body in front of the camera\r\n\r\n<b>3. Camera position</b>\r\n   \u2022  Front-facing, at chest height\r\n   \u2022  Avoid occlusions (nothing covering parts of the body)"

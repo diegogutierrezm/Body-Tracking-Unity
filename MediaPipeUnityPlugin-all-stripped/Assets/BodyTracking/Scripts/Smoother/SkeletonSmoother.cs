@@ -14,10 +14,10 @@ namespace BodyTracking
     [Serializable]
     public struct SmoothingPreset
     {
-        [Tooltip("Más bajo = menos temblor (pero más retraso)")] public float minCutoff;
-        [Tooltip("Más alto = menos retraso en movimientos rápidos (en píxeles)")] public float beta;
-        [Range(0.05f, 1f), Tooltip("Multiplica el Min Cutoff en manos y pies (más bajo = más suave)")] public float extremityFactor;
-        [Range(0.01f, 1f), Tooltip("Multiplica el Min Cutoff en puntos poco fiables")] public float lowVisibilityFactor;
+        [Tooltip("Lower = less jitter (but more lag)")] public float minCutoff;
+        [Tooltip("Higher = less lag on fast movements (in pixels)")] public float beta;
+        [Range(0.05f, 1f), Tooltip("Multiplies Min Cutoff on hands and feet (lower = smoother)")] public float extremityFactor;
+        [Range(0.01f, 1f), Tooltip("Multiplies Min Cutoff on unreliable points")] public float lowVisibilityFactor;
     }
 
     // Suaviza los puntos del esqueleto ANTES de que se dibujen las líneas y de que los usen los demás scripts.
@@ -27,13 +27,13 @@ namespace BodyTracking
     {
         [SerializeField] private SmoothingLevel _level = SmoothingLevel.Medium;
 
-        [Header("Valores de cada nivel")]
+        [Header("Values for each level")]
         [SerializeField] private SmoothingPreset _low = new SmoothingPreset { minCutoff = 3f, beta = 0.1f, extremityFactor = 0.8f, lowVisibilityFactor = 0.5f };
         [SerializeField] private SmoothingPreset _medium = new SmoothingPreset { minCutoff = 2f, beta = 0.05f, extremityFactor = 0.7f, lowVisibilityFactor = 0.3f };
         [SerializeField] private SmoothingPreset _high = new SmoothingPreset { minCutoff = 1f, beta = 0.02f, extremityFactor = 0.4f, lowVisibilityFactor = 0.15f };
 
-        [Header("Visibilidad")]
-        [SerializeField, Range(0f, 1f), Tooltip("Por debajo de esta visibilidad, el punto es poco fiable")]
+        [Header("Visibility")]
+        [SerializeField, Range(0f, 1f), Tooltip("Below this visibility, the point is considered unreliable")]
         private float _minVisibility = 0.5f;
 
         // Para cambiar el nivel desde la UI

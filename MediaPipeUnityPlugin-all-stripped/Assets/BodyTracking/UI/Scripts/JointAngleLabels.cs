@@ -1,5 +1,6 @@
 using Mediapipe.Unity;
 using UnityEngine;
+using UnityEngine.Serialization;
 using static BodyTracking.PoseLandmarkIndex;
 
 namespace BodyTracking
@@ -8,13 +9,14 @@ namespace BodyTracking
     public class JointAngleLabels : MonoBehaviour
     {
         [SerializeField] private JointAngleMeasurer _measurer;
-        [SerializeField, Tooltip("Prefab del cartel (con ArticulacionUI)")] private ArticulacionUI _cartelPrefab;
-        [SerializeField, Tooltip("Separación del cartel respecto a su punto")] private Vector2 _offset = new Vector2(15f, 15f);
-        [SerializeField, Tooltip("Tamaño de los carteles")] private float _scale = 1f;
+        [SerializeField, FormerlySerializedAs("_cartelPrefab"), Tooltip("Label prefab (with JointLabelUI)")]
+        private JointLabelUI _labelPrefab;
+        [SerializeField, Tooltip("Distance between the label and its point")] private Vector2 _offset = new Vector2(15f, 15f);
+        [SerializeField, Tooltip("Label size")] private float _scale = 1f;
 
         private PoseLandmarkListAnnotation _annotation;
-        private ArticulacionUI[] _carteles = new ArticulacionUI[0];
-        private ArticulacionUI _cartelCuello;
+        private JointLabelUI[] _labels = new JointLabelUI[0];
+        private JointLabelUI _neckLabel;
 
         private void Awake()
         {
@@ -27,8 +29,8 @@ namespace BodyTracking
         // La primera vez que se dibuja la pose, crea los carteles dentro de su capa
         private void OnPoseDrawn(PoseLandmarkListAnnotation annotation)
         {
-            if (annotation != _annotation || _carteles.Length != _measurer.Joints.Length)
-                CrearCarteles(annotation);
+            if (annotation != _annotation || _labels.Length != _measurer.Joints.Length)
+                CreateLabels(annotation);
         }
 
         // Cada fotograma: muestra solo los del grupo marcado y los pone junto a su punto
@@ -40,65 +42,62 @@ namespace BodyTracking
 
             var groups = _measurer.VisibleGroups;
             var joints = _measurer.Joints;
+            var neck = (Pos(points, LeftShoulder) + Pos(points, RightShoulder)) * 0.5f;
 
             for (int i = 0; i < joints.Length; i++)
             {
                 var joint = joints[i];
                 bool visible = (groups & joint.group) != 0;
-                _carteles[i].AlternarVisibilidad(visible);
+                _labels[i].SetVisible(visible);
                 if (!visible) continue;
 
-                var punto = Pos(points, joint.jointB);
-                var cuello = (Pos(points, LeftShoulder) + Pos(points, RightShoulder)) * 0.5f;
-                bool haciaLaIzquierda = punto.x < cuello.x;
+                var point = Pos(points, joint.jointB);
+                bool towardLeft = point.x < neck.x;
 
                 // El pivote decide hacia dónde crece el cartel: 0 = hacia la derecha, 1 = hacia la izquierda
-                ((RectTransform)_carteles[i].transform).pivot = new Vector2(haciaLaIzquierda ? 1f : 0f, 0.5f);
-                var offset = new Vector2(haciaLaIzquierda ? -_offset.x : _offset.x, _offset.y);
-                _carteles[i].Colocar(punto + offset);
-                _carteles[i].ActualizarAngulo(joint.currentAngle);
+                ((RectTransform)_labels[i].transform).pivot = new Vector2(towardLeft ? 1f : 0f, 0.5f);
+                var offset = new Vector2(towardLeft ? -_offset.x : _offset.x, _offset.y);
+                _labels[i].SetPosition(point + offset);
+                _labels[i].SetAngle(joint.currentAngle);
             }
 
             bool neckVisible = (groups & BodyGroup.Neck) != 0;
-            _cartelCuello.AlternarVisibilidad(neckVisible);
+            _neckLabel.SetVisible(neckVisible);
             if (neckVisible)
             {
-                var neck = (Pos(points, LeftShoulder) + Pos(points, RightShoulder)) * 0.5f;
-
-
                 // Pivote arriba en el centro: el cartel cuelga hacia abajo, centrado bajo el punto
-                ((RectTransform)_cartelCuello.transform).pivot = new Vector2(0.5f, 1f);
-                _cartelCuello.Colocar(neck + new Vector2(0f, -_offset.y));
-                _cartelCuello.ActualizarTexto(_measurer.NeckText);
+                ((RectTransform)_neckLabel.transform).pivot = new Vector2(0.5f, 1f);
+                _neckLabel.SetPosition(neck + new Vector2(0f, -_offset.y));
+                _neckLabel.SetValueText(_measurer.NeckText);
             }
         }
 
         private static Vector2 Pos(PointListAnnotation points, int i) => points[i].transform.localPosition;
 
-        private void CrearCarteles(PoseLandmarkListAnnotation annotation)
+        private void CreateLabels(PoseLandmarkListAnnotation annotation)
         {
-            foreach (var cartel in _carteles) if (cartel != null) Destroy(cartel.gameObject);
-            if (_cartelCuello != null) Destroy(_cartelCuello.gameObject);
+            foreach (var label in _labels) if (label != null) Destroy(label.gameObject);
+            if (_neckLabel != null) Destroy(_neckLabel.gameObject);
 
             _annotation = annotation;
             var parent = annotation.Points.transform; // la misma capa que los puntos
             var joints = _measurer.Joints;
 
-            _carteles = new ArticulacionUI[joints.Length];
+            _labels = new JointLabelUI[joints.Length];
             for (int i = 0; i < joints.Length; i++)
-                _carteles[i] = Crear(parent, joints[i].jointName);
+                _labels[i] = CreateLabel(parent, joints[i].jointName);
 
-            _cartelCuello = Crear(parent, "Cuello");
+            _neckLabel = CreateLabel(parent, "Neck");
         }
 
-        private ArticulacionUI Crear(Transform parent, string nombre)
+        private JointLabelUI CreateLabel(Transform parent, string jointName)
         {
-            var cartel = Instantiate(_cartelPrefab, parent);
-            cartel.name = "Cartel " + nombre;
-            cartel.nombreArticulacion = nombre;
-            cartel.transform.localScale = Vector3.one * _scale;
-            cartel.AlternarVisibilidad(false);
-            return cartel;
+            var label = Instantiate(_labelPrefab, parent);
+            label.name = "Label " + jointName;
+            label.JointName = jointName;
+            label.transform.localScale = Vector3.one * _scale;
+            label.SetVisible(false);
+            return label;
         }
     }
 }

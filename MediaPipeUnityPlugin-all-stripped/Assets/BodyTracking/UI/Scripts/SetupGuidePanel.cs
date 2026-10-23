@@ -8,9 +8,9 @@ namespace BodyTracking
     {
         [SerializeField] private FramingMonitor _framing;
         [SerializeField] private LightingMonitor _lighting;
-        [SerializeField, Tooltip("El InstructionsPoster de la escena")] private InstructionsPosterUI _poster;
-        [SerializeField, Tooltip("Segundos entre cada actualización")] private float _refreshInterval = 0.5f;
-        [SerializeField, Tooltip("Avisar si no hay nadie delante de la cámara")] private bool _warnNoPerson = true;
+        [SerializeField, Tooltip("The InstructionsPoster in the scene")] private InstructionsPosterUI _poster;
+        [SerializeField, Tooltip("Seconds between updates")] private float _refreshInterval = 0.5f;
+        [SerializeField, Tooltip("Warn when nobody is in front of the camera")] private bool _warnNoPerson = true;
 
         private readonly StringBuilder _sb = new StringBuilder();
         private float _nextRefresh;
@@ -32,7 +32,7 @@ namespace BodyTracking
             {
                 if (!_framing.HasPerson)
                 {
-                    if (_warnNoPerson) Add("Colócate delante de la cámara");
+                    if (_warnNoPerson) Add("Stand in front of the camera");
                 }
                 else
                 {

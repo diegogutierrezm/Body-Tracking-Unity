@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelCartel: {fileID: 3435438817457103375}
   textoAngulo: {fileID: 7161446300838889021}
-  nombreArticulacion: Brazo Izquierdo
+  nombreArticulacion: Joint
 --- !u!114 &2789040595379581982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: cartel
+  m_text: label
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
