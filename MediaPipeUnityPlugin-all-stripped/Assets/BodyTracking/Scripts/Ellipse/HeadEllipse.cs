@@ -7,13 +7,13 @@ namespace BodyTracking
     [Serializable]
     public class HeadEllipseSettings
     {
-        [Tooltip("Alto: veces la distancia ojos-boca")]
+        [Tooltip("Height: times the eyes-mouth distance")]
         public float heightFactor = 1.8f;
-        [Tooltip("Ancho: veces la media distancia entre orejas")]
+        [Tooltip("Width: times half the distance between the ears")]
         public float widthFactor = 1.1f;
-        [Range(0f, 1f), Tooltip("Lo más estrecho que puede quedar respecto al alto")]
+        [Range(0f, 1f), Tooltip("Narrowest width allowed, relative to the height")]
         public float minWidthRatio = 0.6f;
-        [Tooltip(">1 inclina más, <1 inclina menos")]
+        [Tooltip(">1 tilts more, <1 tilts less")]
         public float rollFactor = 1.5f;
     }
 

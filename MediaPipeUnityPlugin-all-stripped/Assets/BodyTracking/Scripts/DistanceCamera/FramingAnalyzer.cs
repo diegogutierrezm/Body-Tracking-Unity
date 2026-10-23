@@ -7,11 +7,11 @@ namespace BodyTracking
     [Serializable]
     public class FramingSettings
     {
-        [Range(0f, 0.2f), Tooltip("Margen mínimo con el borde de la imagen (0.03 = 3 %)")]
+        [Range(0f, 0.2f), Tooltip("Minimum margin to the image edge (0.03 = 3 %)")]
         public float edgeMargin = 0.03f;
-        [Range(0f, 1f), Tooltip("Altura mínima del cuerpo respecto a la imagen. Por debajo: acércate")]
+        [Range(0f, 1f), Tooltip("Minimum body height relative to the image. Below it: move closer")]
         public float minBodyHeight = 0.6f;
-        [Tooltip("Coronilla = ojos + X veces la distancia ojos-boca")]
+        [Tooltip("Head top = eyes + X times the eyes-mouth distance")]
         public float headTopFactor = 1.7f;
     }
 

@@ -78,11 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "<b><size=70>Instrucciones de uso</size></b>\n\n<b>1. Configuracion</b>\n  
-    \u2022  Presiona el boton \\uf7d9 para acceder a la configuracion del body tracking
-    \n\n<b>2. Camara</b>\n   \u2022  Presiona el boton \\uf030 para acceder a la
-    configuracion de la camara\n\n<b>3. Angulos</b>\n   \u2022  Presiona el boton
-    \\u2220 para elegir el angulo que quieres mostrar\n\n\n\n\n\n"
+  m_Text: "<b><size=70>User guide</size></b>\n\n<b>1. Settings</b>\n   \u2022  Press the \\uf7d9 button to open the body tracking settings\n\n<b>2. Camera</b>\n   \u2022  Press the \\uf030 button to open the camera settings\n\n<b>3. Angles</b>\n   \u2022  Press the \\u2220 button to choose which angles to show\n\n\n\n\n\n"
 --- !u!1 &318706203832880801
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,20 +7,20 @@ namespace BodyTracking
   // Coordina: recibe la pose, calcula y manda dibujar cuello, cabeza y coronilla
   public class PoseOverlay : MonoBehaviour
   {
-    [Header("Cabeza")]
+    [Header("Head")]
     [SerializeField] private HeadEllipseSettings _head = new HeadEllipseSettings();
     [SerializeField, Range(8, 128)] private int _headSegments = 30;
 
-    [Header("Aspecto")]
+    [Header("Appearance")]
     [SerializeField] private float _lineWidth = 1f;
     [SerializeField] private Color _headColor = Color.white;
     [SerializeField] private Color _neckColor = Color.magenta;
     [SerializeField] private Color _headTopColor = Color.yellow;
 
-    [Header("Suavizado (One Euro Filter)")]
-    [SerializeField, Tooltip("Más bajo = menos temblor en reposo (pero más retraso)")]
+    [Header("Smoothing (One Euro Filter)")]
+    [SerializeField, Tooltip("Lower = less jitter at rest (but more lag)")]
     private float _minCutoff = 1f;
-    [SerializeField, Tooltip("Más alto = menos retraso en movimientos rápidos (en píxeles)")]
+    [SerializeField, Tooltip("Higher = less lag on fast movements (in pixels)")]
     private float _beta = 0.005f;
 
     public float HeadTiltAngle { get; private set; }

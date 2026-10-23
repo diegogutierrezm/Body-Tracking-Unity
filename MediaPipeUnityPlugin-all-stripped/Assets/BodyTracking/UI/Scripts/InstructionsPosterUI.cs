@@ -6,17 +6,17 @@ namespace BodyTracking
     // Cartel con un título opcional y un texto. Se muestra u oculta desde otros scripts.
     public class InstructionsPosterUI : MonoBehaviour
     {
-        [SerializeField, Tooltip("El fondo del cartel. Si se deja vacío, es este mismo objeto")]
+        [SerializeField, Tooltip("The poster background. If empty, this same object is used")]
         private GameObject _panel;
         [SerializeField] private TextMeshProUGUI _text;
-        [SerializeField, Tooltip("Se muestra en negrita encima del texto. Vacío = sin título")]
-        private string _title = "Ajusta antes de medir";
+        [SerializeField, Tooltip("Shown in bold above the text. Empty = no title")]
+        private string _title = "Adjust before measuring";
 
-        [Header("Sonido al aparecer")]
-        [SerializeField, Tooltip("Debe estar en un objeto que no se oculte (por ejemplo, Solution)")]
+        [Header("Sound when it appears")]
+        [SerializeField, Tooltip("Must be on an object that is never hidden (e.g. Setup Checks)")]
         private AudioSource _audioSource;
         [SerializeField] private AudioClip _appearSound;
-        [SerializeField, Tooltip("Segundos mínimos entre un sonido y el siguiente")]
+        [SerializeField, Tooltip("Minimum seconds between two sounds")]
         private float _soundCooldown = 3f;
 
         private float _lastSoundTime = -100f;

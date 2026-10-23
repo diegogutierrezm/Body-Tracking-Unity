@@ -8,7 +8,7 @@ namespace BodyTracking
     public class ShowInstructionsOnStart : MonoBehaviour
     {
         [SerializeField] private Modal _modalPanel;
-        [SerializeField, Tooltip("Se muestran en este orden")] private GameObject[] _windows;
+        [SerializeField, Tooltip("Shown in this order")] private GameObject[] _windows;
 
         private IEnumerator Start()
         {
